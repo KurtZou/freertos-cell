@@ -181,9 +181,11 @@ void __div0(void)
 
 void pin_toggle(int pin)
 {
+#if 0
 #ifdef CONFIG_MACH_SUN7I
   uint32_t *data_reg = PIO_P7_CFG_REG + 0x10; /* DATA register */
   *data_reg ^= 1<<pin;
+#endif
 #endif
 }
 /* }}} */
@@ -565,11 +567,12 @@ static void prvSetupHardware(void)
 {
   unsigned apsr;
   static unsigned long io_dev_map[2];
+#if 0
   uint32_t *ph_cfg_reg = PIO_P7_CFG_REG;
   /* Set GREEN LED pin as output */
   ph_cfg_reg[3] &= ~(0x7<<0); /* Clear PH24_SELECT */
   ph_cfg_reg[3] |= 0x1<<0; /* Set PH24_SELECT as output */
-
+#endif
   ser_dev = serial_open();
   io_dev_map[0] = (unsigned long)ser_dev;
   show_cache_mmu_status("MMU/Cache status at entry");
