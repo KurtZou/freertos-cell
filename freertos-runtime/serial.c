@@ -82,8 +82,9 @@
 #endif
 
 #define UART7_BASE 0x01C29C00
+#define UART4_BASE 0x01C29000
 #define UART_CLOCK_REG	((void *)0x01c2006c)
-#define UART_GATE_NR	23
+#define UART_GATE_NR	20   // used to be 23
 
 #define UART_TX			0x0
 #define UART_DLL		0x0
@@ -125,7 +126,7 @@ static void mmio_write32(void *addr, uint32_t val)
 sio_fd_t serial_open(void)
 {
 	unsigned divisor = DIV_ROUND_CLOSEST(UART_CLK, 16 * UART_BAUDRATE);
-  sio_fd_t uart_base = (void*)UART7_BASE;
+  sio_fd_t uart_base = (void*)UART4_BASE;
 
   mmio_write32(UART_CLOCK_REG,
       mmio_read32(UART_CLOCK_REG) |
